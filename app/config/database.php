@@ -1,5 +1,5 @@
 <?php
-
+$dbopts = parse_url(getenv('DATABASE_URL'));
 return array(
 
 	/*
@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'pgsql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -65,10 +65,10 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'forge',
-			'username' => 'forge',
-			'password' => '',
+			'host'     => $dbopts["host"].".".$dbopts["port"],
+			'database' => ltrim($dbopts["path"], '/'),
+			'username' => $dbopts["user"],
+			'password' => $dbopts["pass"],
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
