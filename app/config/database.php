@@ -65,7 +65,7 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => $dbopts["host"].".".$dbopts["port"],
+			'host'     => $dbopts["host"].":".$dbopts["port"],
 			'database' => ltrim($dbopts["path"], '/'),
 			'username' => $dbopts["user"],
 			'password' => $dbopts["pass"],
