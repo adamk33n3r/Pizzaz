@@ -2,6 +2,8 @@
 
 A webapp that lets your order pizza from anywhere!
 
+[![Codeship Status for adamk33n3r/Pizzaz](https://codeship.io/projects/6db44b30-31bd-0132-9ac6-46248f4c148f/status)](https://codeship.io/projects/40169)
+
 ## Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
