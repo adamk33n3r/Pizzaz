@@ -1,0 +1,40 @@
+body {
+    background: #222;
+    color: #ccc;
+}
+
+.errors {
+    margin: 10px 0;
+    color: indianred;
+    font-weight: bold;
+}
+
+.errors, label.error {
+    background: #ddd;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.errors .error {
+    color: black;
+    font-weight: bold;
+}
+
+label.error {
+    color: indianred;
+    margin-top: -3px;
+    border-radius: 0 0 5px 5px;
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+.error-message {
+    color: indianred;
+    font-weight: bold;
+}
+
+.form-control {
+    z-index: 1;
+    position: relative;
+}

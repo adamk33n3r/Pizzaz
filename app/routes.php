@@ -1,37 +1,19 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
+    Route::get('/', ['as' => 'pages.index', 'uses' => 'PagesController@index']);
+    Route::get('news', ['as' => 'pages.news', 'uses' => 'PagesController@news']);
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+    // Users
+    Route::resource('users', 'UsersController');
 
-$router->get('/', 'PagesController@index');
-// You can insert the view right here. Good for simple actions.
-//$router->get('/', function() {
-//    return view('pages.home');
-//});
-$router->get('about', 'PagesController@about');
+    Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create']);
+    Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
+    Route::resource('sessions', 'SessionsController');
 
-//Facade
-//Route::get();
-Route::bind('song', function($slug) {
-    return App\Song::whereSlug($slug)->first();
-});
-get('songs', 'SongsController@index');
-get('songs/{song}', 'SongsController@show');
-get('songs/{song}/edit', 'SongsController@edit');
+    Route::get('admin', 'PagesController@admin')->before('auth');
+    //$router->get('/', 'PagesController@index');
+    //$router->get('about', 'PagesController@about');
 
-Route::get('/', function() {
-    return "hello";
-});
+    //Facade
+    //Route::get();
+    //get('songs', 'SongsController@index');
