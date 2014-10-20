@@ -17,7 +17,7 @@ class CreatePlacesTable extends Migration {
 			$table->increments('id');
             $table->string('name');
             $table->string('address');
-            $table->string('phone', 10);
+            $table->string('phone', 12);
             $table->string('hours')->nullable();
 			$table->timestamps();
 		});

@@ -2,10 +2,6 @@
 @section('head')
 <title>Pizzaz - show</title>
 @stop
-<?php
-$c=\Carbon\Carbon::create();
-$c->hour;
-?>
 @section('content')
     <div class="well">
         <h2>{{{ $user->username }}}</h2>
@@ -15,8 +11,8 @@ $c->hour;
             @foreach($orders as $order)
                 <ul class="list-unstyled">
                     <li>
-                        <h3>Order made on {{ strftime('%B %e, %y at %l:%M%P', $order->created_at->timestamp)}}
-                        for {{ strftime('%B %e, %y at %l:%M%P', $order->order_time->timestamp) }}</h3>
+                        <h3>Order made on {{ strftime('%B %e, %Y at %l:%M%P', $order->created_at->timestamp)}}
+                        for {{ strftime('%B %e, %Y at %l:%M%P', $order->order_time->timestamp) }}</h3>
                         <table class="table table-striped">
                             <thead><tr>
                                 <th>Item</th>
