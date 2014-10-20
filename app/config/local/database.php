@@ -1,5 +1,15 @@
 <?php
 
+if (gethostname() !== "homestead") { // For codeship
+    $database = 'test';
+    $username = getenv('MYSQL_USER');
+    $password = getenv('MYSQL_PASSWORD');
+} else {
+    $database = 'homestead';
+    $username = 'homestead';
+    $password = 'secret';
+}
+
 return array(
 
 	/*
@@ -25,9 +35,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'homestead',
-			'username'  => 'homestead',
-			'password'  => 'secret',
+			'database'  => $database,
+			'username'  => $username,
+			'password'  => $password,
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
