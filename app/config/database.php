@@ -1,11 +1,17 @@
 <?php
 $url = parse_url(getenv("DATABASE_URL"));
-
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
-return array(
+if (strlen($url["path"]) > 0) {
+    $default = 'pgsql';
+    $host = $url["host"];
+    $username = $url["user"];
+    $password = $url["pass"];
+    $database = substr($url["path"], 1);
+} else {
+    $default = 'sqlite';
+    $host = '';
+    $username = $password = $database = '';
+};
+return [
 
 	/*
 	|--------------------------------------------------------------------------
@@ -31,7 +37,7 @@ return array(
 	|
 	*/
 
-	'default' => 'pgsql',
+	'default' => $default,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -49,15 +55,15 @@ return array(
 	|
 	*/
 
-	'connections' => array(
+	'connections' => [
 
-		'sqlite' => array(
+		'sqlite' => [
 			'driver'   => 'sqlite',
 			'database' => __DIR__.'/../database/production.sqlite',
 			'prefix'   => '',
-		),
+		],
 
-		'mysql' => array(
+		'mysql' => [
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
 			'database'  => 'forge',
@@ -66,9 +72,9 @@ return array(
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
-		),
+		],
 
-		'pgsql' => array(
+		'pgsql' => [
 			'driver'   => 'pgsql',
 			'host'     => $host,
 			'database' => $database,
@@ -77,18 +83,18 @@ return array(
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
-		),
+		],
 
-		'sqlsrv' => array(
+		'sqlsrv' => [
 			'driver'   => 'sqlsrv',
 			'host'     => 'localhost',
 			'database' => 'database',
 			'username' => 'root',
 			'password' => '',
 			'prefix'   => '',
-		),
+		],
 
-	),
+	],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -114,16 +120,16 @@ return array(
 	|
 	*/
 
-	'redis' => array(
+	'redis' => [
 
 		'cluster' => false,
 
-		'default' => array(
+		'default' => [
 			'host'     => '127.0.0.1',
 			'port'     => 6379,
 			'database' => 0,
-		),
+		],
 
-	),
+	],
 
-);
+];

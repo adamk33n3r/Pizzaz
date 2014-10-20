@@ -8,7 +8,7 @@ class SessionsController extends \BaseController {
 
     public function store() {
         if (Auth::attempt(Input::only('username', 'password'), true))
-            return Redirect::intended();
+            return Redirect::intended(route('users.show', Auth::user()->id));
         else
             return Redirect::route('login')->withInput()->with('error', 'Combination not found. Try again.');
     }

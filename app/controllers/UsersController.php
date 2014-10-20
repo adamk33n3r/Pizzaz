@@ -5,8 +5,12 @@ class UsersController extends \BaseController {
     protected $user;
 
     public function __construct(User $user) {
+        $this->beforeFilter('auth', ['except' => ['create', 'store']]);
+        $this->beforeFilter('admin', ['only' => ['index', 'destroy']]);
+        $this->beforeFilter('mine', ['only' => 'show']);
         $this->user = $user;
     }
+
 
     /**
      * Display a listing of the resource.
@@ -40,8 +44,10 @@ class UsersController extends \BaseController {
         if (!$this->user->fill($input)->isValid())
             return Redirect::back()->withInput()->withErrors($this->user->messages);
         $this->user->save();
-
-        return Redirect::route('users.index');
+        Auth::login($this->user);
+//        dd(Auth::user());
+        return Redirect::route('pages.index');
+//        return Redirect::route('users.show', $this->user->id);
     }
 
 
@@ -53,7 +59,8 @@ class UsersController extends \BaseController {
      */
     public function show($id) {
         $user = $this->user->find($id);
-        Return View::make('users.show')->with('user', $user);
+        $orders = $user->orders;
+        Return View::make('users.show', compact('user', 'orders'));
     }
 
 

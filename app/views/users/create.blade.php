@@ -3,7 +3,7 @@
 <title>Pizzaz - Sign up</title>
 @stop
 @section('content')
-    Create a new account!
+    <h1>Create a new account!</h1>
     {{ Form::open(['route' => 'users.store']) }}
         @if(count($errors) > 0)
             <div class="errors">

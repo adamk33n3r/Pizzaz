@@ -1,6 +1,5 @@
 body {
-    background: #222;
-    color: #ccc;
+    background: darkred;
 }
 
 .errors {
@@ -37,4 +36,35 @@ label.error {
 .form-control {
     z-index: 1;
     position: relative;
+}
+
+
+
+#pizza-img {
+    display: inline-block;
+}
+
+#pizza-pizza {
+    position: relative;
+    left: -165px;
+    top: 100px;
+    transform: rotate(30deg);
+    display: inline-block;
+    font-weight: bold;
+    font-size: 20pt;
+    text-shadow: 1px 1px white;
+}
+
+
+
+
+
+
+
+
+
+
+
+tfoot {
+    font-weight: bold;
 }

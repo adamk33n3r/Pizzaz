@@ -1,8 +1,12 @@
 ## Pizzaz
 
-A webapp that lets your order pizza from anywhere!
+A webapp that lets you order pizza from anywhere!
 
 [![Codeship Status for adamk33n3r/Pizzaz](https://codeship.io/projects/6db44b30-31bd-0132-9ac6-46248f4c148f/status)](https://codeship.io/projects/40169)
+
+TODO:
+
+- Pull out price to another table for many-to-many
 
 ## Laravel PHP Framework
 

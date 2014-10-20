@@ -11,15 +11,13 @@
 |
 */
 
-App::before(function($request)
-{
-	//
+App::before(function ($request) {
+    //
 });
 
 
-App::after(function($request, $response)
-{
-	//
+App::after(function ($request, $response) {
+    //
 });
 
 /*
@@ -33,25 +31,19 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
-{
-	if (Auth::guest())
-	{
-		if (Request::ajax())
-		{
-			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
-			return Redirect::guest('login');
-		}
-	}
+Route::filter('auth', function () {
+    if (Auth::guest()) {
+        if (Request::ajax()) {
+            return Response::make('Unauthorized', 401);
+        } else {
+            return Redirect::guest('login');
+        }
+    }
 });
 
 
-Route::filter('auth.basic', function()
-{
-	return Auth::basic();
+Route::filter('auth.basic', function () {
+    return Auth::basic();
 });
 
 /*
@@ -65,9 +57,9 @@ Route::filter('auth.basic', function()
 |
 */
 
-Route::filter('guest', function()
-{
-	if (Auth::check()) return Redirect::to('/');
+Route::filter('guest', function () {
+    if (Auth::check())
+        return Redirect::to('/');
 });
 
 /*
@@ -81,10 +73,29 @@ Route::filter('guest', function()
 |
 */
 
-Route::filter('csrf', function()
-{
-	if (Session::token() != Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
+Route::filter('csrf', function () {
+    if (Session::token() != Input::get('_token')) {
+        throw new Illuminate\Session\TokenMismatchException;
+    }
+});
+
+/*
+|--------------------------------------------------------------------------
+| Custom
+|--------------------------------------------------------------------------
+*/
+
+Route::filter('admin', function () {
+    if (Auth::check() && !Auth::user()->isAdmin()) {
+        Utils::flash(Utils::FLASH_ERROR, 'You do not have the permissions to perform that action.');
+        return Redirect::route('pages.index');
+    }
+});
+
+Route::filter('mine', function ($route, $request) {
+    $id = $route->getParameter('users');
+    if ($id && $id != Auth::user()->id) {
+        Utils::flash(Utils::FLASH_WARNING, 'You are not allowed to view other profiles.');
+        return Redirect::route('pages.index');
+    }
 });
