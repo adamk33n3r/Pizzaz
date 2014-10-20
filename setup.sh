@@ -1,2 +1,2 @@
 composer install --prefer-source --no-interaction
-php artisan migrate
+php artisan migrate --force
